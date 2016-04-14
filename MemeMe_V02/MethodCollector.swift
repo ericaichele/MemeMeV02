@@ -14,6 +14,7 @@ extension EditMemeViewController {
     func pickingImages(sourceType: UIImagePickerControllerSourceType) {
         let imagePicker = UIImagePickerController()
         imagePicker.delegate = self
+        imagePicker.allowsEditing = true
         presentViewController(imagePicker, animated: true, completion: nil)
         
     }
@@ -63,7 +64,7 @@ extension EditMemeViewController {
     
     // PLACE IMAGE INTO IMAGEVIEW
     func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String: AnyObject]) {
-        if let image = info[UIImagePickerControllerOriginalImage] as? UIImage {
+        if let image = info[UIImagePickerControllerEditedImage] as? UIImage {
 //            let sizeOfImage = imageView.frame.size
 //            imageView.image = RBSquareImageTo(image, size: sizeOfImage)
             imageView.image = image
