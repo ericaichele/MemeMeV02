@@ -17,9 +17,12 @@ class EditMemeViewController: UIViewController, UIImagePickerControllerDelegate,
     @IBOutlet weak var toolBottom: UIToolbar!
     @IBOutlet weak var shareButton: UIBarButtonItem!
     @IBOutlet weak var cameraButton: UIBarButtonItem!
-    @IBOutlet weak var introText: UILabel!
+    @IBOutlet weak var doneButton: UIBarButtonItem!
     
     var sentMemes: [Meme]!
+    var editImage: UIImage!
+    var editTopText: String!
+    var editBottomText: String!
     
     var memeTextAttributes = [
         NSStrokeColorAttributeName : UIColor.blackColor(),
@@ -31,15 +34,19 @@ class EditMemeViewController: UIViewController, UIImagePickerControllerDelegate,
     //OVERRIDES
     override func viewDidLoad() {
         super.viewDidLoad()
-        // DELEGATES
-        self.topText.delegate = self
-        self.bottomText.delegate = self
         
         // PROPERTIES
         view.backgroundColor = UIColor.grayColor()
-        formattingBlock(topText, fieldName: "TOP")
-        formattingBlock(bottomText, fieldName: "BOTTOM")
         shareButton.enabled = false
+        
+        // LOAD EDIT ITEMS
+        topText.text = editTopText
+        bottomText.text = editBottomText
+        imageView.image = editImage
+        
+        // DELEGATES
+        self.topText.delegate = self
+        self.bottomText.delegate = self
     }
     
     override func viewDidAppear(animated: Bool) {
@@ -54,6 +61,8 @@ class EditMemeViewController: UIViewController, UIImagePickerControllerDelegate,
         let object = UIApplication.sharedApplication().delegate
         let appDelegate = object as! AppDelegate
         sentMemes = appDelegate.memes
+        formattingBlock(topText, fieldName: "TOP")
+        formattingBlock(bottomText, fieldName: "BOTTOM")
     }
     
     override func viewWillDisappear(animated: Bool) {

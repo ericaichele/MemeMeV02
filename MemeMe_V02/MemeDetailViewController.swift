@@ -11,8 +11,11 @@ import UIKit
 class MemeDetailViewController: UIViewController {
     
     @IBOutlet weak var imageDetail: UIImageView!
+    @IBOutlet weak var editButton: UIBarButtonItem!
+    @IBOutlet weak var deleteButton: UIBarButtonItem!
     
     var sentMemes: Meme!
+    var indexOfMemes = Int()
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
@@ -27,5 +30,27 @@ class MemeDetailViewController: UIViewController {
     override func viewWillDisappear(animated: Bool) {
         super.viewWillDisappear(animated)
         self.tabBarController?.tabBar.hidden = false
-    }    
+    }
+    
+    @IBAction func editMeme(sender: AnyObject) {
+        self.performSegueWithIdentifier("editMeme", sender: self)
+    }
+    
+    @IBAction func deleteMeme(sender: AnyObject) {
+        let object = UIApplication.sharedApplication().delegate
+        let appDelegate = object as! AppDelegate
+        //Remove From Array
+        appDelegate.memes.removeAtIndex(indexOfMemes)
+        self.navigationController!.popViewControllerAnimated(true)
+    }
+  
+    //PREPARE FOR SEGUE METHOD
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if (segue.identifier == "editMeme") {
+            let editMemeVC = segue.destinationViewController as! EditMemeViewController
+            editMemeVC.editImage = self.sentMemes.originalImage
+            editMemeVC.editTopText = self.sentMemes.topText
+            editMemeVC.editBottomText = self.sentMemes.bottomText
+        }
+    }
 }
