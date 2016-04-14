@@ -121,8 +121,11 @@
                                     <rect key="frame" x="0.0" y="0.0" width="150" height="150"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="fCX-mi-9b7">
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="fCX-mi-9b7">
                                             <rect key="frame" x="8" y="8" width="134" height="134"/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" secondItem="fCX-mi-9b7" secondAttribute="height" multiplier="1:1" id="1eD-MB-caQ"/>
+                                            </constraints>
                                         </imageView>
                                     </subviews>
                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -133,6 +136,9 @@
                                     <constraint firstItem="fCX-mi-9b7" firstAttribute="leading" secondItem="e7q-JL-alW" secondAttribute="leadingMargin" id="fYI-3n-w7M"/>
                                     <constraint firstItem="fCX-mi-9b7" firstAttribute="top" secondItem="e7q-JL-alW" secondAttribute="topMargin" id="lmT-hV-Lxq"/>
                                 </constraints>
+                                <connections>
+                                    <outlet property="collectionImage" destination="fCX-mi-9b7" id="bXG-kn-odB"/>
+                                </connections>
                             </collectionViewCell>
                         </cells>
                         <connections>
@@ -320,7 +326,7 @@
                                     <barButtonItem width="1" style="plain" systemItem="fixedSpace" id="gTE-OG-pwT"/>
                                 </items>
                             </toolbar>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="wDy-6e-huN">
+                            <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="wDy-6e-huN">
                                 <rect key="frame" x="0.0" y="20" width="600" height="536"/>
                             </imageView>
                         </subviews>

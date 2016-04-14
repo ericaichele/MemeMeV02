@@ -20,45 +20,45 @@ extension EditMemeViewController {
     }
     
     // CROP TEST
-    func RBSquareImageTo(image: UIImage, size: CGSize) -> UIImage {
-        return RBResizeImage(RBSquareImage(image), targetSize: size)
-    }
-    
-    func RBSquareImage(image: UIImage) -> UIImage {
-        let originalWidth  = image.size.width
-        let originalHeight = image.size.height
-        
-        let cropSquare = CGRectMake((originalHeight - originalWidth)/2, 0.0, originalWidth, originalWidth)
-        let imageRef = CGImageCreateWithImageInRect(image.CGImage, cropSquare);
-        
-        return UIImage(CGImage: imageRef!, scale: UIScreen.mainScreen().scale, orientation: image.imageOrientation)
-    }
-    
-    func RBResizeImage(image: UIImage, targetSize: CGSize) -> UIImage {
-        let size = image.size
-        
-        let widthRatio  = targetSize.width  / image.size.width
-        let heightRatio = targetSize.height / image.size.height
-        
-        // Figure out what our orientation is, and use that to form the rectangle
-        var newSize: CGSize
-        if(widthRatio > heightRatio) {
-            newSize = CGSizeMake(size.width * heightRatio, size.height * heightRatio)
-        } else {
-            newSize = CGSizeMake(size.width * widthRatio,  size.height * widthRatio)
-        }
-        
-        // This is the rect that we've calculated out and this is what is actually used below
-        let rect = CGRectMake(0, 0, newSize.width, newSize.height)
-        
-        // Actually do the resizing to the rect using the ImageContext stuff
-        UIGraphicsBeginImageContextWithOptions(newSize, false, 1.0)
-        image.drawInRect(rect)
-        let newImage = UIGraphicsGetImageFromCurrentImageContext()
-        UIGraphicsEndImageContext()
-        
-        return newImage
-    }
+//    func RBSquareImageTo(image: UIImage, size: CGSize) -> UIImage {
+//        return RBResizeImage(RBSquareImage(image), targetSize: size)
+//    }
+//    
+//    func RBSquareImage(image: UIImage) -> UIImage {
+//        let originalWidth  = image.size.width
+//        let originalHeight = image.size.height
+//        
+//        let cropSquare = CGRectMake((originalHeight - originalWidth)/2, 0.0, originalWidth, originalWidth)
+//        let imageRef = CGImageCreateWithImageInRect(image.CGImage, cropSquare);
+//        
+//        return UIImage(CGImage: imageRef!, scale: UIScreen.mainScreen().scale, orientation: image.imageOrientation)
+//    }
+//    
+//    func RBResizeImage(image: UIImage, targetSize: CGSize) -> UIImage {
+//        let size = image.size
+//        
+//        let widthRatio  = targetSize.width  / image.size.width
+//        let heightRatio = targetSize.height / image.size.height
+//        
+//        // Figure out what our orientation is, and use that to form the rectangle
+//        var newSize: CGSize
+//        if(widthRatio > heightRatio) {
+//            newSize = CGSizeMake(size.width * heightRatio, size.height * heightRatio)
+//        } else {
+//            newSize = CGSizeMake(size.width * widthRatio,  size.height * widthRatio)
+//        }
+//        
+//        // This is the rect that we've calculated out and this is what is actually used below
+//        let rect = CGRectMake(0, 0, newSize.width, newSize.height)
+//        
+//        // Actually do the resizing to the rect using the ImageContext stuff
+//        UIGraphicsBeginImageContextWithOptions(newSize, false, 1.0)
+//        image.drawInRect(rect)
+//        let newImage = UIGraphicsGetImageFromCurrentImageContext()
+//        UIGraphicsEndImageContext()
+//        
+//        return newImage
+//    }
     
     
     
@@ -81,8 +81,11 @@ extension EditMemeViewController {
         toolBottom.hidden = true
         
         // RENDER VIEW
-        UIGraphicsBeginImageContext(self.view.frame.size)
-        view.drawViewHierarchyInRect(self.view.frame, afterScreenUpdates: true)
+        UIGraphicsBeginImageContextWithOptions(CGSizeMake(imageView.frame.size.width, imageView.frame.size.height), false, 1)
+        
+        //UIGraphicsBeginImageContext(self.view.frame.size)
+        imageView.drawViewHierarchyInRect(CGRectMake(0, 0, self.imageView.frame.size.width, self.imageView.frame.size.height), afterScreenUpdates: true)
+        
         let memedImage : UIImage = UIGraphicsGetImageFromCurrentImageContext()
         UIGraphicsEndImageContext()
         
