@@ -38,7 +38,7 @@ extension EditMemeViewController {
         UIGraphicsBeginImageContextWithOptions(CGSizeMake(imageView.frame.size.width, imageView.frame.size.height), false, 1)
         
         //UIGraphicsBeginImageContext(self.view.frame.size)
-        imageContainer.drawViewHierarchyInRect(CGRectMake(0, 0, self.imageView.frame.size.width, self.imageView.frame.size.height), afterScreenUpdates: true)
+        view.drawViewHierarchyInRect(CGRectMake(0, 0, self.imageView.frame.size.width, self.imageView.frame.size.height), afterScreenUpdates: true)
         
         let memedImage : UIImage = UIGraphicsGetImageFromCurrentImageContext()
         UIGraphicsEndImageContext()
@@ -58,7 +58,7 @@ extension EditMemeViewController {
         // ADD TO MEMES ARRAY IN APP DELGATE
         let object = UIApplication.sharedApplication().delegate
         let appDelegate = object as! AppDelegate
-        appDelegate.memes.append(meme)
+        appDelegate.memes.append(meme)    
     }
     
     // TEXT FORMATTING METHOD

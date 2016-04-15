@@ -53,7 +53,6 @@ class MemeTableViewController: UITableViewController {
         let meme = self.appDelegate.memes[indexPath.row]
         
         cell.memeThumb.image = meme.memedImage
-        cell.memeThumb.contentMode = .ScaleAspectFit
         cell.topTextDisplay.text = "\(meme.topText)"
         cell.bottomTextDisplay.text = "\(meme.bottomText)"
         

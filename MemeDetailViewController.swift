@@ -23,7 +23,7 @@ class MemeDetailViewController: UIViewController {
         super.viewWillAppear(animated)
         // HIDE TAB BAR
         tabBarController?.tabBar.hidden = true
-        view.backgroundColor = UIColor.blackColor()
+        view.backgroundColor = UIColor.grayColor()
         self.imageDetail!.image = self.sentMemes.memedImage
     }
     

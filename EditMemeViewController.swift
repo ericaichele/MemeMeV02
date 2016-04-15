@@ -18,16 +18,6 @@ class EditMemeViewController: UIViewController, UIImagePickerControllerDelegate,
     @IBOutlet weak var shareButton: UIBarButtonItem!
     @IBOutlet weak var cameraButton: UIBarButtonItem!
     @IBOutlet weak var doneButton: UIBarButtonItem!
-    @IBOutlet weak var imageContainer: UIView!
-    @IBOutlet weak var saveButton: UIBarButtonItem!
-    
-    //CONSTRAINTS
-    @IBOutlet var containerTop: NSLayoutConstraint!
-    @IBOutlet var containerBottom: NSLayoutConstraint!
-    @IBOutlet var containerRight: NSLayoutConstraint!
-    @IBOutlet var containerLeft: NSLayoutConstraint!
-    @IBOutlet weak var containerTopText: NSLayoutConstraint!
-    @IBOutlet weak var containerBottomText: NSLayoutConstraint!
     
     var sentMemes: [Meme]!
     var editImage: UIImage!
@@ -58,31 +48,6 @@ class EditMemeViewController: UIViewController, UIImagePickerControllerDelegate,
         // DELEGATES
         self.topText.delegate = self
         self.bottomText.delegate = self
-        
-        // INITIAL ORIENTATION CONTROLLS
-        let currentDevice: UIDevice = UIDevice.currentDevice()
-        let orientation: UIDeviceOrientation = currentDevice.orientation
-        if orientation.isLandscape {
-            containerRight.active = false
-            containerLeft.active = false
-            containerBottom.active = true
-            containerTop.active = true
-            containerTopText.constant = 50
-            containerBottomText.constant = 50
-            view.layoutIfNeeded()
-            print("HORIZONTAL!")
-        } else {
-            containerTop.active = false
-            containerBottom.active = false
-            containerRight.active = true
-            containerLeft.active = true
-            containerTopText.constant = 10
-            containerBottomText.constant = 10
-            view.layoutIfNeeded()
-            print("VERTICAL!")
-        }
-        
-        
         view.layoutIfNeeded()
     }
     
@@ -90,6 +55,11 @@ class EditMemeViewController: UIViewController, UIImagePickerControllerDelegate,
         super.viewDidAppear(animated)
         // ACTIVATE CAMERA BUTTON
         cameraButton.enabled = UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.Camera)
+        if imageView.image == nil {
+            shareButton.enabled = false
+        } else {
+            shareButton.enabled = true
+        }
     }
     
     override func viewWillAppear(animated: Bool) {
@@ -100,10 +70,6 @@ class EditMemeViewController: UIViewController, UIImagePickerControllerDelegate,
         sentMemes = appDelegate.memes
         formattingBlock(topText, fieldName: "TOP")
         formattingBlock(bottomText, fieldName: "BOTTOM")
-        
-        if imageView.image == nil {
-            shareButton.enabled = false
-        }
     }
     
     override func viewWillDisappear(animated: Bool) {
@@ -195,28 +161,5 @@ class EditMemeViewController: UIViewController, UIImagePickerControllerDelegate,
         optionMenu.addAction(changeOptima)
         optionMenu.addAction(changeImpact)
         presentViewController(optionMenu, animated: true, completion: nil)
-    }
-    
-    override func willRotateToInterfaceOrientation(toInterfaceOrientation: UIInterfaceOrientation, duration: NSTimeInterval) {
-        // NEED TO SET UP RULES FOR SPACIING OF TEXT BLOCKS!!!!
-        if UIInterfaceOrientationIsLandscape(toInterfaceOrientation) {
-            containerRight.active = false
-            containerLeft.active = false
-            containerBottom.active = true
-            containerTop.active = true
-            containerTopText.constant = 50
-            containerBottomText.constant = 50
-            view.layoutIfNeeded()
-            print("HORIZONTAL!")
-        } else {
-            containerTop.active = false
-            containerBottom.active = false
-            containerRight.active = true
-            containerLeft.active = true
-            containerTopText.constant = 10
-            containerBottomText.constant = 10
-            view.layoutIfNeeded()
-            print("VERTICAL!")
-        }
     }
 }

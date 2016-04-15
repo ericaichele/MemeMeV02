@@ -50,7 +50,7 @@ class MemeCollectionViewController: UICollectionViewController {
         
         let imageView = UIImageView(image: meme.memedImage)
         cell.backgroundView = imageView
-        cell.backgroundView?.contentMode = .ScaleAspectFit
+        cell.backgroundView?.contentMode = .ScaleAspectFill
         
         return cell
     }
