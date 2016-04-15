@@ -17,10 +17,13 @@ class MemeDetailViewController: UIViewController {
     var sentMemes: Meme!
     var indexOfMemes = Int()
     
+    
+    
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         // HIDE TAB BAR
         self.tabBarController?.tabBar.hidden = true
+        view.backgroundColor = UIColor.blackColor()
         self.imageDetail!.image = self.sentMemes.memedImage
     }
     
@@ -31,17 +34,14 @@ class MemeDetailViewController: UIViewController {
     
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
-        print("VIEW DID APPEAR")
         let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
         let meme = appDelegate.memes[indexOfMemes]
         if meme.editedMeme == true {
-            print("EDITED!")
             imageDetail.image = meme.memedImage
             //self.navigationController!.popViewControllerAnimated(true)
         }
     }
 
-    
     @IBAction func editMeme(sender: AnyObject) {
         self.performSegueWithIdentifier("editMeme", sender: self)
     }

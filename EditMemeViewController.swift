@@ -174,13 +174,10 @@ class EditMemeViewController: UIViewController, UIImagePickerControllerDelegate,
         optionMenu.addAction(changeHelvetica)
         optionMenu.addAction(changeOptima)
         optionMenu.addAction(changeImpact)
-        
         presentViewController(optionMenu, animated: true, completion: nil)
     }
     
     override func willRotateToInterfaceOrientation(toInterfaceOrientation: UIInterfaceOrientation, duration: NSTimeInterval) {
-        
-        
         // NEED TO SET UP RULES FOR SPACIING OF TEXT BLOCKS!!!!
         if UIInterfaceOrientationIsLandscape(toInterfaceOrientation) {
             containerRight.active = false
@@ -202,7 +199,4 @@ class EditMemeViewController: UIViewController, UIImagePickerControllerDelegate,
             print("VERTICAL!")
         }
     }
-    
-    
-  
 }
