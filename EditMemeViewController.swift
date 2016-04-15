@@ -59,10 +59,30 @@ class EditMemeViewController: UIViewController, UIImagePickerControllerDelegate,
         self.topText.delegate = self
         self.bottomText.delegate = self
         
-        containerTop.active = false
-        containerBottom.active = false
-        containerRight.active = true
-        containerLeft.active = true
+        // INITIAL ORIENTATION CONTROLLS
+        let currentDevice: UIDevice = UIDevice.currentDevice()
+        let orientation: UIDeviceOrientation = currentDevice.orientation
+        if orientation.isLandscape {
+            containerRight.active = false
+            containerLeft.active = false
+            containerBottom.active = true
+            containerTop.active = true
+            containerTopText.constant = 50
+            containerBottomText.constant = 50
+            view.layoutIfNeeded()
+            print("HORIZONTAL!")
+        } else {
+            containerTop.active = false
+            containerBottom.active = false
+            containerRight.active = true
+            containerLeft.active = true
+            containerTopText.constant = 10
+            containerBottomText.constant = 10
+            view.layoutIfNeeded()
+            print("VERTICAL!")
+        }
+        
+        
         view.layoutIfNeeded()
     }
     

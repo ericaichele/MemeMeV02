@@ -25,7 +25,6 @@ extension EditMemeViewController {
             imageView.image = image
             self.dismissViewControllerAnimated(true, completion: nil)
         }
-        shareButton.enabled = true
     }
     
     // GENERATE MEME
