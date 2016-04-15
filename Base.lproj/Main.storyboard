@@ -338,6 +338,7 @@
                                         </connections>
                                     </barButtonItem>
                                     <barButtonItem style="plain" systemItem="flexibleSpace" id="vuD-id-Mts"/>
+                                    <barButtonItem style="plain" systemItem="flexibleSpace" id="z3Z-VE-VLO"/>
                                     <barButtonItem systemItem="done" id="8h8-h4-joW">
                                         <connections>
                                             <action selector="DoneButtonAction:" destination="6Bl-sQ-gSq" id="1vY-As-Fbt"/>
@@ -407,7 +408,7 @@
                                     <barButtonItem systemItem="edit" id="iRe-yi-5cq">
                                         <connections>
                                             <action selector="editMeme:" destination="xmL-TD-iG9" id="kVO-yC-Kic"/>
-                                            <segue destination="6Bl-sQ-gSq" kind="presentation" identifier="editMeme" id="PD8-2x-EZJ"/>
+                                            <segue destination="6Bl-sQ-gSq" kind="presentation" identifier="editMeme" id="gDW-Dq-Mqg"/>
                                         </connections>
                                     </barButtonItem>
                                     <barButtonItem style="plain" systemItem="flexibleSpace" id="sn0-eN-oan"/>

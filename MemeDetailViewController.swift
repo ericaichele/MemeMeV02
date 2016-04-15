@@ -19,11 +19,8 @@ class MemeDetailViewController: UIViewController {
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
-        
         // HIDE TAB BAR
         self.tabBarController?.tabBar.hidden = true
-        
-        // SET UIIMAGE VIEW, hopefully.
         self.imageDetail!.image = self.sentMemes.memedImage
     }
     
@@ -31,6 +28,16 @@ class MemeDetailViewController: UIViewController {
         super.viewWillDisappear(animated)
         self.tabBarController?.tabBar.hidden = false
     }
+    
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(animated)
+        print("VIEW DID APPEAR")
+        if sentMemes.editedMeme == true {
+            print("EDITED!")
+            self.navigationController!.popViewControllerAnimated(true)
+        }
+    }
+
     
     @IBAction func editMeme(sender: AnyObject) {
         self.performSegueWithIdentifier("editMeme", sender: self)
@@ -56,6 +63,8 @@ class MemeDetailViewController: UIViewController {
             editMemeVC.editImage = self.sentMemes.originalImage
             editMemeVC.editTopText = self.sentMemes.topText
             editMemeVC.editBottomText = self.sentMemes.bottomText
+            editMemeVC.fromDetails = true
+            editMemeVC.editIndexPath = self.indexOfMemes
         }
     }
 }

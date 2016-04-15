@@ -19,13 +19,13 @@ class EditMemeViewController: UIViewController, UIImagePickerControllerDelegate,
     @IBOutlet weak var cameraButton: UIBarButtonItem!
     @IBOutlet weak var doneButton: UIBarButtonItem!
     @IBOutlet weak var imageContainer: UIView!
+    @IBOutlet weak var saveButton: UIBarButtonItem!
     
     //CONSTRAINTS
     @IBOutlet var containerTop: NSLayoutConstraint!
     @IBOutlet var containerBottom: NSLayoutConstraint!
     @IBOutlet var containerRight: NSLayoutConstraint!
     @IBOutlet var containerLeft: NSLayoutConstraint!
-    
     @IBOutlet weak var containerTopText: NSLayoutConstraint!
     @IBOutlet weak var containerBottomText: NSLayoutConstraint!
     
@@ -33,6 +33,8 @@ class EditMemeViewController: UIViewController, UIImagePickerControllerDelegate,
     var editImage: UIImage!
     var editTopText: String!
     var editBottomText: String!
+    var editIndexPath: Int!
+    var fromDetails: Bool!
     
     var memeTextAttributes = [
         NSStrokeColorAttributeName : UIColor.blackColor(),
@@ -87,6 +89,7 @@ class EditMemeViewController: UIViewController, UIImagePickerControllerDelegate,
     override func viewWillDisappear(animated: Bool) {
         super.viewWillAppear(animated)
         self.unsubscribeFromKeyboardNotifications()
+        fromDetails = false
     }
     
     // HIDE STATUS BAR
@@ -125,12 +128,20 @@ class EditMemeViewController: UIViewController, UIImagePickerControllerDelegate,
             }
             alertController.addAction(OKAction)
             self.presentViewController(alertController, animated: true, completion: nil)
-//        } else  if {
-//            segue
+        } else if fromDetails == true  {
+            print("test")
+            // OVERWRITE MEME
+            let revisedMeme = Meme(topText: topText.text!, bottomText: bottomText.text!, originalImage: imageView.image!, memedImage: generateMemedImage(), editedMeme: true)
+            let object = UIApplication.sharedApplication().delegate
+            let appDelegate = object as! AppDelegate
+            appDelegate.memes[editIndexPath] = revisedMeme
+            print("\(appDelegate.memes)")
+            self.dismissViewControllerAnimated(true, completion: nil)
         } else {
             self.dismissViewControllerAnimated(true, completion: nil)
         }
     }
+    
     
     // FONT ACTION SHEET
     @IBAction func changeFont(sender: AnyObject) {
@@ -176,6 +187,8 @@ class EditMemeViewController: UIViewController, UIImagePickerControllerDelegate,
             containerLeft.active = false
             containerBottom.active = true
             containerTop.active = true
+            containerTopText.constant = 50
+            containerBottomText.constant = 50
             view.layoutIfNeeded()
             print("HORIZONTAL!")
         } else {
@@ -183,6 +196,8 @@ class EditMemeViewController: UIViewController, UIImagePickerControllerDelegate,
             containerBottom.active = false
             containerRight.active = true
             containerLeft.active = true
+            containerTopText.constant = 10
+            containerBottomText.constant = 10
             view.layoutIfNeeded()
             print("VERTICAL!")
         }
