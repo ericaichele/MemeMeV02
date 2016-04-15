@@ -19,8 +19,6 @@ extension EditMemeViewController {
         
     }
     
-    
-    
     // PLACE IMAGE INTO IMAGEVIEW
     func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String: AnyObject]) {
         if let image = info[UIImagePickerControllerEditedImage] as? UIImage {
