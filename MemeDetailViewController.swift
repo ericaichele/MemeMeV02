@@ -32,9 +32,12 @@ class MemeDetailViewController: UIViewController {
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
         print("VIEW DID APPEAR")
-        if sentMemes.editedMeme == true {
+        let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+        let meme = appDelegate.memes[indexOfMemes]
+        if meme.editedMeme == true {
             print("EDITED!")
-            self.navigationController!.popViewControllerAnimated(true)
+            imageDetail.image = meme.memedImage
+            //self.navigationController!.popViewControllerAnimated(true)
         }
     }
 
